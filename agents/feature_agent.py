@@ -22,7 +22,7 @@ class FeatureAnalysisAgent:
         model_name : str
             HuggingFace model to use for the agent
         """
-        print("\n🤖 Initializing Smolagent for Feature Analysis...")
+        print("Initializing Smolagent for Feature Analysis...")
         
         # Initialize model
         self.model = HfApiModel(model_id=model_name)
@@ -34,7 +34,7 @@ class FeatureAnalysisAgent:
             max_steps=5
         )
         
-        print("✅ Agent initialized successfully!")
+        print("Agent initialized successfully!")
     
     def analyze_feature_importance(self, feature_importance_dict):
         """
@@ -67,7 +67,7 @@ class FeatureAnalysisAgent:
         Be specific and practical.
         """
         
-        print("\n🔍 Analyzing feature importance...")
+        print("Analyzing feature importance...")
         result = self.agent.run(prompt)
         
         return result
@@ -103,7 +103,7 @@ class FeatureAnalysisAgent:
         Be thorough and specific.
         """
         
-        print("\n📋 Generating risk profile...")
+        print("Generating risk profile...")
         result = self.agent.run(prompt)
         
         return result
@@ -144,7 +144,7 @@ class FeatureAnalysisAgent:
         while maintaining fairness.
         """
         
-        print("\n💡 Generating feature engineering suggestions...")
+        print("Generating feature engineering suggestions...")
         result = self.agent.run(prompt)
         
         return result
@@ -157,7 +157,7 @@ class RiskRecommendationAgent:
     
     def __init__(self, model_name="HuggingFaceH4/zephyr-7b-beta"):
         """Initialize the risk recommendation agent"""
-        print("\n🤖 Initializing Risk Recommendation Agent...")
+        print("Initializing Risk Recommendation Agent...")
         
         self.model = HfApiModel(model_id=model_name)
         self.agent = CodeAgent(
@@ -166,7 +166,7 @@ class RiskRecommendationAgent:
             max_steps=5
         )
         
-        print("✅ Agent initialized!")
+        print("Agent initialized!")
     
     def generate_recommendation(self, loan_data, default_probability, risk_factors):
         """
@@ -211,7 +211,7 @@ class RiskRecommendationAgent:
         Be practical and consider both business growth and risk management.
         """
         
-        print("\n📝 Generating loan recommendation...")
+        print("Generating loan recommendation...")
         result = self.agent.run(prompt)
         
         return result
@@ -219,8 +219,8 @@ class RiskRecommendationAgent:
 
 # Example usage and testing
 if __name__ == "__main__":
-    print("\n" + "="*60)
-    print("🧪 TESTING SMOLAGENTS INTEGRATION")
+    print("="*60)
+    print("TESTING SMOLAGENTS INTEGRATION")
     print("="*60)
     
     # Example feature importance
@@ -249,7 +249,7 @@ if __name__ == "__main__":
         "avg_payment_score": 75
     }
     
-    print("\n" + "="*60)
+    print("="*60)
     print("Note: Smolagents requires HuggingFace API access.")
     print("For full functionality, set HUGGINGFACE_TOKEN in your environment.")
     print("="*60)
@@ -257,8 +257,8 @@ if __name__ == "__main__":
     # Uncomment to test with actual API:
     # agent = FeatureAnalysisAgent()
     # analysis = agent.analyze_feature_importance(feature_importance)
-    # print("\n📊 Feature Analysis:")
+    # print("Feature Analysis:")
     # print(analysis)
     
-    print("\n✅ Smolagents module created successfully!")
-    print("   Ready for integration with Streamlit app")
+    print("Smolagents module created successfully!")
+    print("Ready for integration with Streamlit app")
