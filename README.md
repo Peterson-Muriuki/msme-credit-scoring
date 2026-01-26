@@ -231,7 +231,7 @@ Contributions welcome! Please:
 
 ## License
 
-MIT License - see LICENSE file
+MIT License 
 
 ## Author
 
@@ -245,12 +245,6 @@ MIT License - see LICENSE file
 - Built with Smolagents by HuggingFace
 - World Quant University alumni community
 - African fintech ecosystem
-
-## Support
-
-For questions or issues:
-- Open a [GitHub Issue](https://github.com/yourusername/credit-risk-msme/issues)
-- Email: your.email@example.com
 
 ## Links
 
