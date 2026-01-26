@@ -20,7 +20,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Page config
 st.set_page_config(
     page_title="MSME Credit Risk Scoring",
-    page_icon="💰",
+    page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -46,17 +46,17 @@ def load_models():
         transformers = joblib.load('models/feature_transformers.pkl')
         return xgb_model, lr_model, transformers
     except Exception as e:
-        st.error(f"❌ Error loading models: {e}")
-        st.info("💡 Please run the training pipeline first:\n\n1. `python src/data_generator.py`\n2. `python src/feature_engineering.py`\n3. `python src/model_training.py`")
+        st.error(f"Error loading models: {e}")
+        st.info("Please run the training pipeline first:\n\n1. `python src/data_generator.py`\n2. `python src/feature_engineering.py`\n3. `python src/model_training.py`")
         return None, None, None
 
 def create_input_form():
     """Create input form for loan application"""
     
-    st.sidebar.header("📋 Loan Application")
+    st.sidebar.header("Loan Application")
     
     # Basic Information
-    with st.sidebar.expander("🏢 Basic Information", expanded=True):
+    with st.sidebar.expander("Basic Information", expanded=True):
         country = st.selectbox(
             "Country",
             ['Kenya', 'Nigeria', 'Ghana', 'Tanzania', 'Uganda', 'Rwanda']
@@ -74,7 +74,7 @@ def create_input_form():
         )
     
     # Loan Details
-    with st.sidebar.expander("💵 Loan Details", expanded=True):
+    with st.sidebar.expander("Loan Details", expanded=True):
         loan_amount = st.number_input(
             "Loan Amount ($)",
             min_value=500, max_value=50000, value=5000, step=100
@@ -91,7 +91,7 @@ def create_input_form():
         ) / 100
     
     # Financial Information
-    with st.sidebar.expander("💼 Financial Information"):
+    with st.sidebar.expander("Financial Information"):
         monthly_revenue = st.number_input(
             "Monthly Revenue ($)",
             min_value=100, max_value=100000, value=8000, step=100
@@ -103,7 +103,7 @@ def create_input_form():
         )
     
     # Mobile Money
-    with st.sidebar.expander("📱 Mobile Money History"):
+    with st.sidebar.expander("Mobile Money History"):
         avg_monthly_transactions = st.slider(
             "Avg Monthly Transactions",
             min_value=10, max_value=200, value=50
@@ -125,7 +125,7 @@ def create_input_form():
         )
     
     # Social & Network
-    with st.sidebar.expander("🤝 Social & Network"):
+    with st.sidebar.expander("Social & Network"):
         num_business_connections = st.slider(
             "Business Connections",
             min_value=0, max_value=50, value=10
@@ -137,12 +137,12 @@ def create_input_form():
         )
     
     # Formalization
-    with st.sidebar.expander("📜 Business Formalization"):
+    with st.sidebar.expander("Business Formalization"):
         has_business_permit = st.checkbox("Has Business Permit", value=True)
         has_tax_id = st.checkbox("Has Tax ID", value=True)
     
     # Credit History
-    with st.sidebar.expander("📊 Credit History"):
+    with st.sidebar.expander("Credit History"):
         num_previous_loans = st.number_input(
             "Previous Loans",
             min_value=0, max_value=10, value=1
@@ -151,7 +151,7 @@ def create_input_form():
         previous_default = st.checkbox("Previous Default", value=False)
     
     # Payment Behavior
-    with st.sidebar.expander("💳 Payment Behavior"):
+    with st.sidebar.expander("Payment Behavior"):
         utility_payment_score = st.slider(
             "Utility Payment Score",
             min_value=0, max_value=100, value=75
@@ -164,7 +164,7 @@ def create_input_form():
     
     # Seasonality
     is_harvest_season = st.sidebar.checkbox(
-        "🌾 Harvest Season (Agriculture)",
+        "Harvest Season (Agriculture)",
         value=False
     )
     
@@ -272,13 +272,13 @@ def main():
     """Main application"""
     
     # Header
-    st.title("💰 MSME Credit Risk Scoring System")
-    st.markdown("### 🚀 Powered by AI & Alternative Data")
+    st.title("MSME Credit Risk Scoring System")
+    st.markdown("### Powered by AI & Alternative Data")
     
     # Add Smolagents badge
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        st.info("🤖 Enhanced with Smolagents AI")
+        st.info("Enhanced with Smolagents AI")
     
     st.markdown("---")
     
@@ -293,10 +293,10 @@ def main():
     
     # Main area tabs
     tab1, tab2, tab3, tab4 = st.tabs([
-        "🎯 Risk Assessment",
-        "📊 Portfolio Analytics", 
-        "🤖 AI Insights",
-        "ℹ️ About"
+        "Risk Assessment",
+        "Portfolio Analytics", 
+        "AI Insights",
+        "About"
     ])
     
     with tab1:
@@ -306,17 +306,17 @@ def main():
         
         with col1:
             analyze_btn = st.button(
-                "🔍 Analyze Credit Risk",
+                "Analyze Credit Risk",
                 type="primary",
                 use_container_width=True
             )
         
         with col2:
-            if st.button("🔄 Reset", use_container_width=True):
+            if st.button("Reset", use_container_width=True):
                 st.rerun()
         
         if analyze_btn:
-            with st.spinner("🔍 Analyzing application..."):
+            with st.spinner("Analyzing application..."):
                 # Engineer features
                 X = engineer_features(input_df, transformers)
                 
@@ -343,13 +343,13 @@ def main():
                 
                 with col3:
                     if avg_prob <= 0.05:
-                        recommendation = "✅ APPROVE"
+                        recommendation = "APPROVE"
                         rec_color = "success"
                     elif avg_prob <= 0.15:
-                        recommendation = "⚠️ REVIEW"
+                        recommendation = "REVIEW"
                         rec_color = "warning"
                     else:
-                        recommendation = "❌ REJECT"
+                        recommendation = "REJECT"
                         rec_color = "danger"
                     
                     st.metric("Recommendation", recommendation)
@@ -369,9 +369,9 @@ def main():
                                unsafe_allow_html=True)
                     
                     st.markdown("### Model Predictions")
-                    st.write(f"**XGBoost:** {xgb_prob*100:.2f}%")
-                    st.write(f"**Logistic Reg:** {lr_prob*100:.2f}%")
-                    st.write(f"**Ensemble:** {avg_prob*100:.2f}%")
+                    st.write(f"XGBoost: {xgb_prob*100:.2f}%")
+                    st.write(f"Logistic Reg: {lr_prob*100:.2f}%")
+                    st.write(f"Ensemble: {avg_prob*100:.2f}%")
                 
                 # Risk factors
                 st.markdown("---")
@@ -379,24 +379,24 @@ def main():
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    st.markdown("### ⚠️ Risk Factors")
+                    st.markdown("Risk Factors")
                     
                     risk_factors = []
                     if input_df['previous_default'].values[0] == 1:
-                        risk_factors.append("• Previous default history")
+                        risk_factors.append("Previous default history")
                     
                     debt_to_income = input_df['loan_amount'].values[0] / (
                         input_df['monthly_revenue'].values[0] * 
                         input_df['loan_term_months'].values[0]
                     )
                     if debt_to_income > 0.5:
-                        risk_factors.append(f"• High debt-to-income ({debt_to_income:.2f})")
+                        risk_factors.append(f"High debt-to-income ({debt_to_income:.2f})")
                     
                     if input_df['business_age_months'].values[0] < 12:
-                        risk_factors.append("• Young business (<1 year)")
+                        risk_factors.append("Young business (<1 year)")
                     
                     if input_df['has_business_permit'].values[0] == 0:
-                        risk_factors.append("• No business permit")
+                        risk_factors.append("No business permit")
                     
                     if risk_factors:
                         for factor in risk_factors:
@@ -405,21 +405,21 @@ def main():
                         st.success("No significant risk factors")
                 
                 with col2:
-                    st.markdown("### ✅ Protective Factors")
+                    st.markdown("Protective Factors")
                     
                     protective = []
                     if (input_df['previous_default'].values[0] == 0 and 
                         input_df['num_previous_loans'].values[0] > 0):
-                        protective.append("• Good repayment history")
+                        protective.append("Good repayment history")
                     
                     if (input_df['has_business_permit'].values[0] == 1 and 
                         input_df['has_tax_id'].values[0] == 1):
-                        protective.append("• Fully formalized")
+                        protective.append("Fully formalized")
                     
                     avg_payment = (input_df['utility_payment_score'].values[0] + 
                                  input_df['rent_payment_score'].values[0]) / 2
                     if avg_payment > 70:
-                        protective.append(f"• Strong payment history ({avg_payment:.0f})")
+                        protective.append(f"Strong payment history ({avg_payment:.0f})")
                     
                     if protective:
                         for factor in protective:
@@ -428,7 +428,7 @@ def main():
                         st.warning("Limited protective factors")
     
     with tab2:
-        st.header("📊 Portfolio Analytics")
+        st.header("Portfolio Analytics")
         
         # Financial metrics
         col1, col2, col3, col4 = st.columns(4)
@@ -487,66 +487,6 @@ def main():
             st.plotly_chart(fig, use_container_width=True)
     
     with tab3:
-        st.header("🤖 AI-Powered Insights")
+        st.header("AI-Powered Insights")
         
-        st.info("💡 This section uses Smolagents for advanced analysis")
-        
-        st.markdown("""
-        ### Features Available:
-        
-        1. **📊 Feature Importance Analysis**
-           - Understand which factors drive credit decisions
-           - Get business recommendations
-           
-        2. **🎯 Risk Profile Generation**
-           - Detailed risk assessment
-           - Personalized recommendations
-           
-        3. **💡 Feature Engineering Suggestions**
-           - Ideas for model improvement
-           - Alternative data sources
-        
-        ### 🔜 Coming Soon
-        These features require HuggingFace API access. Set your API key in Settings to enable.
-        """)
-        
-        # Placeholder for Smolagents integration
-        if st.button("🚀 Enable AI Insights"):
-            st.warning("⚙️ Configure your HuggingFace API key in Settings to enable this feature.")
-    
-    with tab4:
-        st.header("ℹ️ About This System")
-        
-        st.markdown("""
-        ### 🎯 Purpose
-        AI-powered credit risk assessment for African MSMEs using alternative data sources.
-        
-        ### 📊 Data Sources
-        - **Mobile Money**: Transaction patterns and history
-        - **Social Capital**: Business networks and reputation
-        - **Business Formalization**: Permits and registration
-        - **Payment Behavior**: Utility and rent payments
-        
-        ### 🤖 Technology Stack
-        - **Models**: XGBoost, Logistic Regression
-        - **AI Agent**: Smolagents for insights
-        - **Frontend**: Streamlit
-        - **Python**: 3.9+
-        
-        ### 🎯 Performance
-        - ✅ 97.5% Repayment Rate
-        - ✅ 2.5% Default Rate  
-        - ✅ 0.94 ROC-AUC Score
-        
-        ### 📚 Learn More
-        - [GitHub Repository](#)
-        - [Technical Documentation](#)
-        - [About Smolagents](https://huggingface.co/docs/smolagents)
-        
-        ---
-        
-        **Built with ❤️ for African MSMEs**
-        """)
-
-if __name__ == "__main__":
-    main()
+        st.info("This section uses Smolagents for advanced
