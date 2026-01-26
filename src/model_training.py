@@ -34,7 +34,7 @@ class CreditRiskModelTrainer:
         Split data into train and test sets with SMOTE
         """
         print("\n" + "="*60)
-        print("📊 PREPARING DATA")
+        print("PREPARING DATA")
         print("="*60)
         
         X = df[feature_cols]
@@ -67,7 +67,7 @@ class CreditRiskModelTrainer:
         Train Logistic Regression model
         """
         print("\n" + "="*60)
-        print("🔵 TRAINING LOGISTIC REGRESSION")
+        print("TRAINING LOGISTIC REGRESSION")
         print("="*60)
         
         model = LogisticRegression(
@@ -92,7 +92,7 @@ class CreditRiskModelTrainer:
         self.models['logistic_regression'] = model
         self.results['logistic_regression'] = results
         
-        print("\n   ✅ Logistic Regression training complete!")
+        print("\n   Logistic Regression training complete!")
         
         return model, results
     
@@ -101,7 +101,7 @@ class CreditRiskModelTrainer:
         Train XGBoost model
         """
         print("\n" + "="*60)
-        print("🟢 TRAINING XGBOOST")
+        print("TRAINING XGBOOST")
         print("="*60)
         
         # Calculate scale_pos_weight
@@ -145,7 +145,7 @@ class CreditRiskModelTrainer:
         self.models['xgboost'] = model
         self.results['xgboost'] = results
         
-        print("\n   ✅ XGBoost training complete!")
+        print("\n   XGBoost training complete!")
         
         return model, results
     
@@ -153,7 +153,7 @@ class CreditRiskModelTrainer:
         """
         Comprehensive model evaluation
         """
-        print(f"\n   📊 Evaluating {model_name}...")
+        print(f"\n   Evaluating {model_name}...")
         
         # Calculate metrics
         tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
@@ -174,7 +174,7 @@ class CreditRiskModelTrainer:
         }
         
         # Print results
-        print(f"\n   📈 {model_name} Results:")
+        print(f"\n   {model_name} Results:")
         print(f"      Repayment Rate: {repayment_rate*100:.2f}%")
         print(f"      Default Rate: {default_rate*100:.2f}%")
         print(f"      ROC-AUC: {roc_auc:.4f}")
@@ -183,8 +183,8 @@ class CreditRiskModelTrainer:
         meets_repayment = repayment_rate >= 0.95
         meets_default = default_rate <= 0.03
         
-        print(f"\n      {'✅' if meets_repayment else '❌'} Repayment Target (>95%)")
-        print(f"      {'✅' if meets_default else '❌'} Default Target (<3%)")
+        print(f"      {'Pass' if meets_repayment else 'Fail'} Repayment Target (>95%)")
+        print(f"      {'Pass' if meets_default else 'Fail'} Default Target (<3%)")
         
         # Save ROC curve
         self._save_roc_curve(y_true, y_pred_proba, model_name)
@@ -207,7 +207,7 @@ class CreditRiskModelTrainer:
         plt.savefig(f'models/{filename}', dpi=150, bbox_inches='tight')
         plt.close()
         
-        print(f"      💾 Feature importance saved: models/{filename}")
+        print(f"      Feature importance saved: models/{filename}")
     
     def _save_roc_curve(self, y_true, y_pred_proba, model_name):
         """Save ROC curve"""
@@ -231,14 +231,14 @@ class CreditRiskModelTrainer:
         plt.savefig(f'models/{filename}', dpi=150, bbox_inches='tight')
         plt.close()
         
-        print(f"      💾 ROC curve saved: models/{filename}")
+        print(f"      ROC curve saved: models/{filename}")
     
     def compare_models(self):
         """
         Compare all trained models
         """
         print("\n" + "="*60)
-        print("📊 MODEL COMPARISON")
+        print("MODEL COMPARISON")
         print("="*60)
         
         comparison_data = []
@@ -255,7 +255,7 @@ class CreditRiskModelTrainer:
         
         # Save comparison
         comparison_df.to_csv('models/model_comparison.csv', index=False)
-        print("\n💾 Comparison saved to models/model_comparison.csv")
+        print("\nComparison saved to models/model_comparison.csv")
         
         return comparison_df
     
@@ -266,30 +266,30 @@ class CreditRiskModelTrainer:
         for name, model in self.models.items():
             filepath = f'{prefix}{name}_model.pkl'
             joblib.dump(model, filepath)
-            print(f"   💾 Saved: {filepath}")
+            print(f"   Saved: {filepath}")
         
         # Save results
         joblib.dump(self.results, f'{prefix}model_results.pkl')
-        print(f"   💾 Saved: {prefix}model_results.pkl")
+        print(f"   Saved: {prefix}model_results.pkl")
 
 
 if __name__ == "__main__":
     print("\n" + "="*60)
-    print("🚀 STARTING MODEL TRAINING PIPELINE")
+    print("STARTING MODEL TRAINING PIPELINE")
     print("="*60)
     
     # Load processed data
-    print("\n📂 Loading processed data...")
+    print("\nLoading processed data...")
     df = pd.read_csv('data/processed/msme_features_scaled.csv')
-    print(f"   ✅ Loaded {len(df)} records")
+    print(f"   Loaded {len(df)} records")
     
     # Load feature columns
-    print("\n📋 Loading feature configuration...")
+    print("\nLoading feature configuration...")
     from feature_engineering import MSMEFeatureEngineering
     fe = MSMEFeatureEngineering()
     fe.load_transformers()
     feature_cols = fe.get_feature_columns()
-    print(f"   ✅ Loaded {len(feature_cols)} features")
+    print(f"   Loaded {len(feature_cols)} features")
     
     # Initialize trainer
     trainer = CreditRiskModelTrainer()
@@ -299,7 +299,7 @@ if __name__ == "__main__":
     
     # Train models
     print("\n" + "="*60)
-    print("🎯 TRAINING MODELS")
+    print("TRAINING MODELS")
     print("="*60)
     
     lr_model, lr_results = trainer.train_logistic_regression(X_train, y_train, X_test, y_test)
@@ -310,12 +310,11 @@ if __name__ == "__main__":
     
     # Save everything
     print("\n" + "="*60)
-    print("💾 SAVING MODELS")
+    print("SAVING MODELS")
     print("="*60)
     trainer.save_models()
     
-    print("\n" + "="*60)
-    print("✅ MODEL TRAINING COMPLETE!")
+    print("\nMODEL TRAINING COMPLETE!")
     print("="*60)
-    print("\n🎯 Next step:")
+    print("\nNext step:")
     print("   Run: streamlit run streamlit_app/app.py")
