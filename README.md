@@ -2,9 +2,21 @@
 
 An AI-powered credit risk assessment system for Micro, Small, and Medium Enterprises (MSMEs) in Africa, enhanced with **Smolagents** for intelligent insights.
 
+An AI-powered credit risk assessment system for Micro, Small, and Medium Enterprises (MSMEs) in Africa, enhanced with **Smolagents** for intelligent insights.
+
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.26+-red.svg)](https://streamlit.io)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Pandas](https://img.shields.io/badge/pandas-1.6+-blue.svg)](https://pandas.pydata.org/)
+[![NumPy](https://img.shields.io/badge/numpy-1.26+-orange.svg)](https://numpy.org/)
+[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.2+-green.svg)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/xgboost-1.7+-orange.svg)](https://xgboost.readthedocs.io/)
+[![TensorFlow](https://img.shields.io/badge/tensorflow-2.15+-orange.svg)](https://www.tensorflow.org/)
+[![PyTorch](https://img.shields.io/badge/pytorch-2.1+-red.svg)](https://pytorch.org/)
+[![Smolagents](https://img.shields.io/badge/Smolagents-1.0+-blue.svg)](https://huggingface.co/docs/smolagents)
+[![Plotly](https://img.shields.io/badge/plotly-5.16+-blue.svg)](https://plotly.com/python/)
+[![SHAP](https://img.shields.io/badge/shap-0.42+-green.svg)](https://shap.readthedocs.io/)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 ## Project Overview
 
