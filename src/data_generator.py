@@ -178,7 +178,7 @@ def generate_msme_data(n_samples=10000, output_path='data/raw/msme_loan_data.csv
     df.to_csv(output_path, index=False)
     
     # Display summary
-    print(f"\n✅ Dataset generated successfully!")
+    print(f"\n Dataset generated successfully!")
     print(f"   Total samples: {len(df)}")
     print(f"   Default rate: {df['defaulted'].mean()*100:.2f}%")
     print(f"   Repayment rate: {(1-df['defaulted'].mean())*100:.2f}%")
@@ -186,7 +186,7 @@ def generate_msme_data(n_samples=10000, output_path='data/raw/msme_loan_data.csv
     print("="*60)
     
     # Display distribution
-    print("\n📊 Distribution Summary:")
+    print("\n Distribution Summary:")
     print(f"\nBy Country:")
     print(df['country'].value_counts().to_string())
     print(f"\nBy Sector:")
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     df = generate_msme_data(n_samples=10000)
     
     print("\n" + "="*60)
-    print("✅ Data generation complete!")
+    print(" Data generation complete!")
     print("="*60)
     print("\nNext steps:")
     print("1. Run: python src/feature_engineering.py")
