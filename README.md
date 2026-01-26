@@ -202,23 +202,6 @@ Top 10 predictive features:
 
 ### Deploy to Streamlit Cloud
 
-1. Push to GitHub:
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-
-3. Connect your GitHub repository
-
-4. Set main file: `streamlit_app/app.py`
-
-5. Deploy!
-
-Your app will be live at: `https://msme-credit-scoring-ybqjxvzhqjzgjmb72dgnfj.streamlit.app/`
-
 ## Documentation
 
 - **Feature Engineering**: 43+ derived features from alternative data
@@ -277,4 +260,3 @@ For questions or issues:
 
 **Built with ❤️ for African MSMEs | Powered by AI & Alternative Data**
 
-⭐ Star this repo if you find it helpful!
