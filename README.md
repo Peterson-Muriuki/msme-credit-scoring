@@ -1,4 +1,4 @@
-# 💰 MSME Credit Risk Scoring System
+# MSME Credit Risk Scoring System
 
 An AI-powered credit risk assessment system for Micro, Small, and Medium Enterprises (MSMEs) in Africa, enhanced with **Smolagents** for intelligent insights.
 
@@ -6,20 +6,20 @@ An AI-powered credit risk assessment system for Micro, Small, and Medium Enterpr
 [![Streamlit](https://img.shields.io/badge/streamlit-1.26+-red.svg)](https://streamlit.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🎯 Project Overview
+## Project Overview
 
 This system addresses the **$360B financing gap** for African MSMEs by leveraging alternative data sources and machine learning to assess creditworthiness beyond traditional methods.
 
 ### Key Features
 
-- ✅ **97.5% Repayment Rate** (Target: >95%)
-- ✅ **2.5% Default Rate** (Target: <3%)
-- 🤖 **AI-Powered Insights** using Smolagents
-- 📊 **Alternative Data**: Mobile money, social networks, business formalization
-- 🚀 **Real-time Assessment** via interactive Streamlit dashboard
-- 📈 **43+ Engineered Features** from multiple data sources
+- **97.5% Repayment Rate** (Target: >95%)
+- **2.5% Default Rate** (Target: <3%)
+- **AI-Powered Insights** using Smolagents
+- **Alternative Data**: Mobile money, social networks, business formalization
+- **Real-time Assessment** via interactive Streamlit dashboard
+- **43+ Engineered Features** from multiple data sources
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 Input Data → Feature Engineering → Ensemble Models → Risk Assessment → AI Insights
@@ -29,7 +29,7 @@ Social Data     Encode           Logistic Reg       Classification  Analysis
 Formalization   Scale            Neural Net         Recommendation
 ```
 
-## 📊 Data Sources
+## Data Sources
 
 1. **Mobile Money Transactions**
    - Transaction frequency and amounts
@@ -52,7 +52,7 @@ Formalization   Scale            Neural Net         Recommendation
    - Previous loans
    - Default history
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -93,7 +93,7 @@ streamlit run streamlit_app/app.py
 
 Access the app at: `http://localhost:8501`
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 credit-risk-msme/
@@ -116,14 +116,14 @@ credit-risk-msme/
 └── README.md
 ```
 
-## 🤖 Smolagents Integration
+## Smolagents Integration
 
 This project uses **Smolagents** for AI-powered analysis:
 
-- 📊 Feature importance interpretation
-- 🎯 Risk profile generation
-- 💡 Feature engineering suggestions
-- 📝 Automated recommendations
+- Feature importance interpretation
+- Risk profile generation
+- Feature engineering suggestions
+- Automated recommendations
 
 ### Enable Smolagents Features
 
@@ -134,7 +134,7 @@ This project uses **Smolagents** for AI-powered analysis:
    ```
 3. Uncomment Smolagents code in `agents/feature_agent.py`
 
-## 📈 Model Performance
+## Model Performance
 
 | Model | Repayment Rate | Default Rate | ROC-AUC |
 |-------|---------------|--------------|---------|
@@ -143,10 +143,10 @@ This project uses **Smolagents** for AI-powered analysis:
 | **Ensemble** | **97.5%** | **2.5%** | **0.93** |
 
 All models exceed targets:
-- ✅ Repayment Rate > 95%
-- ✅ Default Rate < 3%
+- Repayment Rate > 95%
+- Default Rate < 3%
 
-## 🔍 Key Features by Importance
+## Key Features by Importance
 
 Top 10 predictive features:
 
@@ -161,7 +161,7 @@ Top 10 predictive features:
 9. **Loan Amount** (5%) - Exposure size
 10. **Country Risk** (4%) - Geographic factor
 
-## 🎨 Streamlit Dashboard
+## Streamlit Dashboard
 
 ### Features:
 
@@ -186,7 +186,7 @@ Top 10 predictive features:
    - Performance metrics
    - Technology stack
 
-## 🚀 Deployment
+## Deployment
 
 ### Deploy to Streamlit Cloud
 
@@ -205,16 +205,16 @@ Top 10 predictive features:
 
 5. Deploy!
 
-Your app will be live at: `https://your-app.streamlit.app`
+Your app will be live at: `https://msme-credit-scoring-ybqjxvzhqjzgjmb72dgnfj.streamlit.app/`
 
-## 📚 Documentation
+## Documentation
 
 - **Feature Engineering**: 43+ derived features from alternative data
 - **Model Training**: XGBoost, Logistic Regression with SMOTE
 - **Evaluation**: ROC curves, threshold optimization, portfolio analysis
 - **Smolagents**: AI-powered insights and recommendations
 
-## 🔄 Quarterly Updates
+## Quarterly Updates
 
 The system supports quarterly model iterations:
 
@@ -224,7 +224,7 @@ The system supports quarterly model iterations:
 4. Validate performance
 5. Deploy updated models
 
-## 🤝 Contributing
+## Contributing
 
 Contributions welcome! Please:
 
@@ -234,34 +234,31 @@ Contributions welcome! Please:
 4. Add tests
 5. Submit a pull request
 
-## 📄 License
+## License
 
 MIT License - see LICENSE file
 
-## 👥 Author
+## Author
 
-**[Your Name]**
-- LinkedIn: [Your LinkedIn]
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
+**Peterson Muriuki**
+- LinkedIn: [(https://www.linkedin.com/in/peterson-muriuki-5857aaa9/)]
+- Email: pitmuriuki@gmail.com
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Inspired by Pezesha's mission to close Africa's MSME financing gap
 - Built with Smolagents by HuggingFace
 - World Quant University alumni community
 - African fintech ecosystem
 
-## 📞 Support
+## Support
 
 For questions or issues:
 - Open a [GitHub Issue](https://github.com/yourusername/credit-risk-msme/issues)
 - Email: your.email@example.com
 
-## 🔗 Links
+## Links
 
-- **Live Demo**: [Your Streamlit App URL]
-- **Documentation**: [Your Docs URL]
 - **Smolagents**: [HuggingFace Smolagents](https://huggingface.co/docs/smolagents)
 
 ---
