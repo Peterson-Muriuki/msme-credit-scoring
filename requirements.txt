@@ -1,0 +1,39 @@
+# Core Data Science
+pandas
+numpy
+scipy
+
+# Machine Learning
+scikit-learn
+xgboost
+tensorflow
+imbalanced-learn
+
+# Smolagents for AI Agents
+smolagents
+transformers
+torch	
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Model Interpretation
+shap
+
+# Streamlit
+streamlit
+streamlit-aggrid
+
+# Utilities
+joblib
+python-dotenv
+pydantic
+
+# Testing
+pytest
+
+# Additional
+requests
+tqdm
