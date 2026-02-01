@@ -2,8 +2,6 @@
 
 An AI-powered credit risk assessment system for Micro, Small, and Medium Enterprises (MSMEs) in Africa, enhanced with **Smolagents** for intelligent insights.
 
-An AI-powered credit risk assessment system for Micro, Small, and Medium Enterprises (MSMEs) in Africa, enhanced with **Smolagents** for intelligent insights.
-
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.26+-red.svg)](https://streamlit.io)
 [![Pandas](https://img.shields.io/badge/pandas-1.6+-blue.svg)](https://pandas.pydata.org/)
