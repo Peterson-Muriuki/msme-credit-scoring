@@ -74,12 +74,12 @@ Formalization   Scale            Neural Net         Recommendation
 
 ```bash
 # Clone repository
-git clone https://github.com/YOUR_USERNAME/credit-risk-msme.git
+git clone https://github.com........credit-risk-msme.git
 cd credit-risk-msme
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate 
 
 # Install dependencies
 pip install -r requirements.txt
@@ -100,8 +100,6 @@ python src/model_training.py
 # 4. Launch Streamlit app
 streamlit run streamlit_app/app.py
 ```
-
-Access the app at: `http://localhost:8501`
 
 ## Project Structure
 
@@ -140,9 +138,8 @@ This project uses **Smolagents** for AI-powered analysis:
 1. Get HuggingFace API token from [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
 2. Set environment variable:
    ```bash
-   export HUGGINGFACE_TOKEN="your_token_here"
+   export HUGGINGFACE_TOKEN="--------"
    ```
-3. Uncomment Smolagents code in `agents/feature_agent.py`
 
 ## Model Performance
 
