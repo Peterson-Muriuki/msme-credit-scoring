@@ -40,8 +40,9 @@ data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
-# Models (large files)
-models/*.pkl
+# Models (large files) - pkl files are kept for Streamlit Cloud deployment
+# Uncomment these lines if models become too large:
+# models/*.pkl
 models/*.h5
 models/*.joblib
 models/*.pt

@@ -41,9 +41,14 @@ st.markdown("""
 def load_models():
     """Load trained models and transformers"""
     try:
-        xgb_model = joblib.load('models/xgboost_model.pkl')
-        lr_model = joblib.load('models/logistic_regression_model.pkl')
-        transformers = joblib.load('models/feature_transformers.pkl')
+        # Get the directory where this script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        # Models are in the parent directory's models folder
+        models_dir = os.path.join(os.path.dirname(script_dir), 'models')
+        
+        xgb_model = joblib.load(os.path.join(models_dir, 'xgboost_model.pkl'))
+        lr_model = joblib.load(os.path.join(models_dir, 'logistic_regression_model.pkl'))
+        transformers = joblib.load(os.path.join(models_dir, 'feature_transformers.pkl'))
         return xgb_model, lr_model, transformers
     except Exception as e:
         st.error(f"Error loading models: {e}")
@@ -489,4 +494,89 @@ def main():
     with tab3:
         st.header("AI-Powered Insights")
         
-        st.info("This section uses Smolagents for advanced
+        st.info("This section uses Smolagents for advanced credit risk analysis and personalized recommendations.")
+        
+        st.subheader("Key Risk Indicators")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("#### Business Health")
+            health_score = (
+                min(100, input_df['business_age_months'].values[0] / 60 * 40) +
+                input_df['has_business_permit'].values[0] * 30 +
+                input_df['has_tax_id'].values[0] * 30
+            )
+            st.progress(health_score / 100)
+            st.caption(f"Health Score: {health_score:.0f}/100")
+        
+        with col2:
+            st.markdown("#### Financial Stability")
+            stability_score = (
+                min(40, input_df['monthly_revenue'].values[0] / 10000 * 40) +
+                (1 - input_df['previous_default'].values[0]) * 30 +
+                min(30, input_df['num_previous_loans'].values[0] * 10)
+            )
+            st.progress(min(1.0, stability_score / 100))
+            st.caption(f"Stability Score: {stability_score:.0f}/100")
+        
+        st.markdown("---")
+        
+        st.subheader("AI Recommendations")
+        
+        recommendations = []
+        
+        if input_df['business_age_months'].values[0] < 12:
+            recommendations.append("Consider building more business history before larger loan amounts")
+        
+        if input_df['has_business_permit'].values[0] == 0:
+            recommendations.append("Obtaining a business permit could improve approval chances")
+        
+        if input_df['avg_payment_score'].values[0] < 60 if 'avg_payment_score' in input_df.columns else (input_df['utility_payment_score'].values[0] + input_df['rent_payment_score'].values[0]) / 2 < 60:
+            recommendations.append("Focus on improving payment history for utilities and rent")
+        
+        if input_df['loan_amount'].values[0] > input_df['monthly_revenue'].values[0] * 3:
+            recommendations.append("Consider a smaller loan amount relative to monthly revenue")
+        
+        if not recommendations:
+            recommendations.append("Profile looks strong! Maintain current business practices")
+        
+        for i, rec in enumerate(recommendations, 1):
+            st.markdown(f"{i}. {rec}")
+    
+    with tab4:
+        st.header("About This System")
+        
+        st.markdown("""
+        ### MSME Credit Risk Scoring System
+        
+        This system uses machine learning and alternative data sources to assess credit risk 
+        for Micro, Small, and Medium Enterprises (MSMEs) in African markets.
+        
+        #### Data Sources Used:
+        - **Mobile Money Transactions**: Transaction history, volume, and patterns
+        - **Business Formalization**: Permits, tax registration, business age
+        - **Social Capital**: Business connections and social credit scores
+        - **Payment History**: Utility and rent payment records
+        - **Loan History**: Previous borrowing and repayment behavior
+        
+        #### Models:
+        - **XGBoost**: Gradient boosting classifier for complex pattern recognition
+        - **Logistic Regression**: Interpretable baseline model
+        - **Ensemble**: Combined predictions for robust scoring
+        
+        #### Target Metrics:
+        - Repayment Rate: > 95%
+        - Default Rate: < 3%
+        
+        #### Technology Stack:
+        - Python, Streamlit, Scikit-learn, XGBoost
+        - Smolagents for AI-powered insights
+        """)
+        
+        st.markdown("---")
+        st.caption("Built for inclusive financial services in Africa")
+
+
+if __name__ == "__main__":
+    main()

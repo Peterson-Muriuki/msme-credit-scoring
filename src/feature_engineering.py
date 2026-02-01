@@ -1,3 +1,4 @@
+"""
 Feature Engineering for Credit Risk Model
 ==========================================
 Creates derived features from alternative data sources
@@ -161,3 +162,110 @@ class MSMEFeatureEngineering:
         print(f"   Features added: {df.shape[1] - original_shape[1]}")
         
         return df
+    
+    def get_feature_columns(self):
+        """
+        Return list of feature columns for model training
+        """
+        if self.feature_cols:
+            return self.feature_cols
+        
+        # Default feature columns used for model
+        feature_cols = [
+            # Original numeric features
+            'business_age_months', 'loan_amount', 'loan_term_months', 'interest_rate',
+            'monthly_revenue', 'num_employees', 'avg_monthly_transactions',
+            'avg_transaction_amount', 'mobile_money_tenure_months', 'transaction_velocity',
+            'num_business_connections', 'social_score', 'has_business_permit', 'has_tax_id',
+            'num_previous_loans', 'previous_default', 'utility_payment_score',
+            'rent_payment_score', 'is_harvest_season',
+            # Engineered features
+            'debt_to_income', 'revenue_per_employee', 'loan_to_monthly_revenue',
+            'total_monthly_volume', 'transaction_consistency', 'mm_activity_score',
+            'maturity_score', 'is_repeat_borrower', 'high_risk_history',
+            'avg_payment_score', 'reliable_payer', 'network_strength',
+            'high_risk_sector', 'mature_formal_business', 'trusted_borrower',
+            # Encoded categorical features
+            'country_encoded', 'sector_encoded', 'transaction_size_category_encoded',
+            'country_risk_tier_encoded', 'loan_size_category_encoded',
+            'loan_term_category_encoded', 'interest_rate_category_encoded'
+        ]
+        return feature_cols
+    
+    def scale_features(self, df, feature_cols, is_training=True):
+        """
+        Scale numerical features using StandardScaler
+        """
+        print("\nScaling features...")
+        df = df.copy()
+        
+        if is_training:
+            scaler = StandardScaler()
+            df[feature_cols] = scaler.fit_transform(df[feature_cols])
+            self.scalers['main'] = scaler
+        else:
+            if 'main' in self.scalers:
+                df[feature_cols] = self.scalers['main'].transform(df[feature_cols])
+            else:
+                scaler = StandardScaler()
+                df[feature_cols] = scaler.fit_transform(df[feature_cols])
+        
+        print(f"   Scaled {len(feature_cols)} features")
+        return df
+    
+    def save_transformers(self, path='models/feature_transformers.pkl'):
+        """
+        Save encoders and scalers
+        """
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        transformers = {
+            'encoders': self.encoders,
+            'scalers': self.scalers,
+            'feature_cols': self.get_feature_columns()
+        }
+        joblib.dump(transformers, path)
+        print(f"   Transformers saved to {path}")
+    
+    def load_transformers(self, path='models/feature_transformers.pkl'):
+        """
+        Load encoders and scalers
+        """
+        transformers = joblib.load(path)
+        self.encoders = transformers['encoders']
+        self.scalers = transformers['scalers']
+        self.feature_cols = transformers['feature_cols']
+        print(f"   Transformers loaded from {path}")
+
+
+if __name__ == "__main__":
+    print("\n" + "="*60)
+    print("STARTING FEATURE ENGINEERING PIPELINE")
+    print("="*60)
+    
+    # Load raw data
+    print("\nLoading raw data...")
+    df = pd.read_csv('data/raw/msme_loan_data.csv')
+    print(f"   Loaded {len(df)} records")
+    
+    # Initialize feature engineering
+    fe = MSMEFeatureEngineering()
+    
+    # Create features
+    df_features = fe.create_features(df, is_training=True)
+    
+    # Get feature columns and scale
+    feature_cols = fe.get_feature_columns()
+    df_scaled = fe.scale_features(df_features, feature_cols, is_training=True)
+    
+    # Save processed data
+    os.makedirs('data/processed', exist_ok=True)
+    df_scaled.to_csv('data/processed/msme_features_scaled.csv', index=False)
+    print(f"\n   Saved processed data: data/processed/msme_features_scaled.csv")
+    
+    # Save transformers
+    fe.save_transformers()
+    
+    print("\nFEATURE ENGINEERING COMPLETE!")
+    print("="*60)
+    print("\nNext step:")
+    print("   Run: python src/model_training.py")
